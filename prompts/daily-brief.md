@@ -174,14 +174,30 @@ After collecting raw data, apply judgment before writing the briefing:
 
 6. **Always include links** -- every reference must be clickable.
 
-7. **Write the Prep for Today section last** -- synthesize the full picture.
+7. **Bias self-check** -- before writing the final output, pause and ask:
+   - **Anchoring:** Which source did I process first, and did it set the frame for
+     everything else? Would the "Needs Your Attention Now" list look different if I'd
+     started with a different source?
+   - **Recency/volume:** Am I elevating something because it generated the most raw
+     data (e.g., a noisy chat channel) rather than because it's the highest-impact
+     signal?
+   - **Confirmation:** Am I surfacing what I already know the user cares about while
+     underweighting a signal that doesn't fit their usual pattern but still matters?
+   - **Omission:** Scan each source's results one more time. Is there a signal from a
+     later-processed source that deserves top-of-brief placement but got buried because
+     an earlier source set the narrative?
 
-8. **If nothing is flagged in a section** -- write "Nothing flagged" rather than
+   If the self-check surfaces a reordering, adjust before writing the output. If it
+   doesn't change anything, move on -- don't manufacture false corrections.
+
+8. **Write the Prep for Today section last** -- synthesize the full picture.
+
+9. **If nothing is flagged in a section** -- write "Nothing flagged" rather than
    padding with low-signal items.
 
-9. **Propose context updates** -- after writing the full briefing, review all signals
-   for items that should update `memory/open-threads.md` or `memory/interactions.md`.
-   List specific proposed changes. Do not apply changes without confirmation.
+10. **Propose context updates** -- after writing the full briefing, review all signals
+    for items that should update `memory/open-threads.md` or `memory/interactions.md`.
+    List specific proposed changes. Do not apply changes without confirmation.
 
 ---
 

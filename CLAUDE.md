@@ -138,7 +138,7 @@ Reusable prompts live in `prompts/`. Reference them by name:
 - Don't default to bullets. If it reads naturally as a sentence, write it as a sentence
 - Don't force symmetry — not every list needs 3 points, not every section needs equal weight
 - No corporate-speak: "leverage" (as a verb), "synergy", "align on", "socialize", "circle back"
-- Match Tramaine's register — direct, specific, confident. Not formal, not casual
+- Match the user's register -- direct, specific, confident. Not formal, not casual
 
 ---
 

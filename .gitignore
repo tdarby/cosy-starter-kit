@@ -1,0 +1,22 @@
+# Secrets & credentials
+.env
+*.secret
+*.key
+*.pem
+secrets/
+
+# Private scratch space (never committed)
+scratch-private/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code cache
+.claude/

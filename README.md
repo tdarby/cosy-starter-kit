@@ -17,7 +17,7 @@ prompts/               <- Reusable prompt templates (daily brief, status reports
 briefs/                <- Output directory for generated briefs and reports
 qc/                    <- Quarterly review artifacts
 setup/                 <- Getting started guide, integrations, update guide
-scripts/               <- Utility scripts (includes vacation cron poller)
+scripts/               <- Automation scripts (daily brief cron, vacation poller)
 ```
 
 ## Quick start
@@ -32,127 +32,6 @@ scripts/               <- Utility scripts (includes vacation cron poller)
 See `setup/getting-started.md` for the full walkthrough. For automated daily
 briefs, see `setup/daily-brief-cron.md`. For PTO automation, see
 `setup/vacation-mode.md`.
-## Your first 30 days
-
-CoSy gets more useful the more context she has. Don't try to fill everything at once —
-build the habit in layers. Here's a realistic ramp:
-
-### Week 1 — Foundation
-*Goal: Get CoSy running and prove value on the simplest use cases.*
-
-**Setup (Day 1, ~30 min):**
-- Fill in `profile/identity.md` — career arc, current role, skills
-- Fill in `profile/goals.md` — what you're working toward this quarter
-- Fill in `profile/preferences.md` — how you work, what drains you, what energizes you
-- Add your team to `team/roster.md` — names, roles, focus areas
-- Set this week's priorities in `work/priorities.md`
-
-**Daily habit (Days 2–5):**
-```
-"CoSy, run my daily brief."
-```
-That's it. One prompt, every morning. Let CoSy surface priorities, open threads,
-and team signals. Adjust the output format in `prompts/daily-brief.md` until it
-feels right.
-
-**End of week:**
-```
-"CoSy, draft my weekly status report for the week of [date]."
-```
-Review the draft. Note where CoSy had thin context — those gaps tell you what to
-fill in next.
-
----
-
-### Week 2 — Team intelligence
-*Goal: CoSy knows your team well enough to answer "what is X working on?"*
-
-- Create a context file for each direct report using `team/context/_template.md`
-- After every 1:1, spend 2 minutes updating that person's file:
-  ```
-  "CoSy, update [name]'s context file. Here's what we covered: [notes]"
-  ```
-- Try the team pulse prompt:
-  ```
-  "CoSy, give me a team pulse for this week."
-  ```
-
----
-
-### Week 3 — Close the loop daily
-*Goal: CoSy captures what happened, not just what's planned.*
-
-- Add the EOD debrief to your end-of-day routine:
-  ```
-  "CoSy, run my EOD debrief."
-  ```
-  This compares what you planned (morning brief) against what actually happened,
-  updates open threads, and sets up tomorrow's top 3.
-
-- Start logging significant interactions in `memory/interactions.md`. CoSy can do
-  this for you after the EOD debrief.
-
----
-
-### Week 4 — Priorities and roadmap
-*Goal: CoSy understands the work deeply enough to flag risk.*
-
-- Fill in `work/roadmap.md` with your team's current quarter commitments
-- Run a roadmap review:
-  ```
-  "CoSy, how is the roadmap looking? Anything at risk?"
-  ```
-- Try task prioritization with a real task list:
-  ```
-  "CoSy, here are my open tasks: [list]. Rank them by leverage."
-  ```
-
----
-
-### Month 2 — Relationships and signals
-*Goal: CoSy tracks the people and information landscape around you.*
-
-- Add key stakeholders to `relationships/stakeholders.md` and create context files
-  for the ones that matter most
-- Run a relationship check:
-  ```
-  "CoSy, who haven't I connected with recently that I should?"
-  ```
-- Try the signal scan:
-  ```
-  "CoSy, run a signal scan. What's worth my attention this week?"
-  ```
-- Start your reading list in `memory/tabs/reading-list.md` — drop links when you
-  don't have time to read something now
-
----
-
-### End of quarter — Review
-*Goal: CoSy helps you reflect and prepare.*
-
-- Draft your quarterly self-review:
-  ```
-  "CoSy, draft my quarterly review for Q[#] [YYYY]."
-  ```
-- If you manage people, review their submissions:
-  ```
-  "CoSy, review [Name]'s quarterly review for Q[#] [YYYY]."
-  ```
-
----
-
-### The compound effect
-
-CoSy's value isn't in any single prompt — it's in accumulated context.
-A daily brief on Day 1 is useful. A daily brief on Day 60, backed by two months
-of team context, interaction history, and open threads, is a different tool entirely.
-
-**The one habit that matters most:** update context files after significant moments.
-Two minutes after a 1:1. One minute after a key decision. That's the investment
-that makes everything else work.
-
----
-
 ## Your first 30 days
 
 CoSy gets more useful the more context she has. Don't try to fill everything at once —

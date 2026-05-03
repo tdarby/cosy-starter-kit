@@ -67,6 +67,5 @@ of headless execution via cron.
 ## Future Considerations
 
 - LinkedIn signals (industry visibility, relevant posts)
-- Automated daily brief delivery (cron + Claude API)
 - Performance review system integration
 - Custom CoSy web UI / mobile interface

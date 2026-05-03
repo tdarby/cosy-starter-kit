@@ -7,9 +7,10 @@
 #
 # Setup:
 #   1. Update COSY_DIR below to your CoSy repo path
-#   2. Update EMAIL below to your work email
-#   3. Make executable: chmod +x scripts/daily-brief-cron.sh
-#   4. Add to crontab (starts ~15 min before you want the email):
+#   2. Optionally set EMAIL to receive the brief by email
+#   3. Update ALLOWED_TOOLS to match your integrations
+#   4. Make executable: chmod +x scripts/daily-brief-cron.sh
+#   5. Add to crontab (starts ~15 min before you want the email):
 #      crontab -e
 #      45 10 * * 1-5 /path/to/cosy/scripts/daily-brief-cron.sh >> /path/to/cosy/logs/daily-brief-cron.log 2>&1
 #
@@ -21,7 +22,17 @@ set -euo pipefail
 
 # ----- CONFIGURE THESE -----
 COSY_DIR="$HOME/repos/cosy"
-EMAIL="you@company.com"
+EMAIL=""  # Optional: set to your work email for delivery. Leave empty to save locally only.
+
+# Tools to pre-approve for headless execution. Bash, Read, and Write are the
+# minimum. Add MCP tool names for your integrations. To find your MCP tool
+# names, run: claude mcp list
+# See setup/integrations.md for details.
+ALLOWED_TOOLS="Bash,Read,Write"
+# Common additions (uncomment what you use):
+# ALLOWED_TOOLS="${ALLOWED_TOOLS},mcp__slack__search_messages,mcp__slack__get_channel_history"
+# ALLOWED_TOOLS="${ALLOWED_TOOLS},mcp__github__search_pull_requests,mcp__github__list_pull_requests"
+# ALLOWED_TOOLS="${ALLOWED_TOOLS},mcp__google-drive__readGoogleDoc,mcp__google-drive__getGoogleSheetContent"
 # ---------------------------
 
 # If your CLI tools (e.g., gws) use the system keyring for OAuth tokens,
@@ -50,8 +61,14 @@ fi
 
 log "Running daily brief."
 
+# Build the email instruction (only if EMAIL is configured)
+EMAIL_INSTRUCTION=""
+if [[ -n "${EMAIL}" && "${EMAIL}" != "you@company.com" ]]; then
+    EMAIL_INSTRUCTION=" AND email it to ${EMAIL} as HTML"
+fi
+
 cd "${COSY_DIR}"
-claude -p "Run my daily brief for $(date +'%A, %B %-d, %Y'). Follow the instructions in prompts/daily-brief.md exactly. Save the briefing to briefs/daily/${TODAY}.md AND email it to ${EMAIL} as HTML.
+claude -p "Run my daily brief for $(date +'%A, %B %-d, %Y'). Follow the instructions in prompts/daily-brief.md exactly. Save the briefing to briefs/daily/${TODAY}.md${EMAIL_INSTRUCTION}.
 
 HEADLESS MODE INSTRUCTIONS (this is running unattended via cron):
 - Do NOT ask interactive questions or wait for confirmation.
@@ -76,12 +93,15 @@ HEADLESS MODE INSTRUCTIONS (this is running unattended via cron):
   '# Pending Context Updates'
 
 - If any data source fails, note it in the brief and continue." \
-    --allowedTools "Bash,Read,Write,mcp__slack__search_messages,mcp__slack__get_channel_history,mcp__github__search_pull_requests" \
+    --allowedTools "${ALLOWED_TOOLS}" \
     > "${LOG_DIR}/daily-brief-${TODAY}.log" 2>&1
 
 # Check if the brief was created
 if [[ -f "${COSY_DIR}/briefs/daily/${TODAY}.md" ]]; then
-    log "Daily brief saved and emailed."
+    log "Daily brief saved."
+    if [[ -n "${EMAIL_INSTRUCTION}" ]]; then
+        log "Email requested to ${EMAIL}."
+    fi
     log "Session log: ${LOG_DIR}/daily-brief-${TODAY}.log"
 else
     log "WARNING: Claude ran but no brief file was created. Check ${LOG_DIR}/daily-brief-${TODAY}.log"

@@ -7,8 +7,9 @@
 #
 # Setup:
 #   1. Update COSY_DIR below to your CoSy repo path
-#   2. Make executable: chmod +x scripts/vacation-poller.sh
-#   3. Add to crontab (runs weekdays at ~9 AM your local time):
+#   2. Update ALLOWED_TOOLS to match your integrations
+#   3. Make executable: chmod +x scripts/vacation-poller.sh
+#   4. Add to crontab (runs weekdays at ~9 AM your local time):
 #      crontab -e
 #      7 13 * * 1-5 /path/to/cosy/scripts/vacation-poller.sh >> /path/to/cosy/logs/vacation-poller.log 2>&1
 #
@@ -20,6 +21,15 @@ set -euo pipefail
 
 # ----- CONFIGURE THESE -----
 COSY_DIR="$HOME/repos/cosy"
+
+# Tools to pre-approve for headless execution. Bash, Read, and Write are the
+# minimum. Add MCP tool names for your integrations. To find your MCP tool
+# names, run: claude mcp list
+# See setup/integrations.md for details.
+ALLOWED_TOOLS="Bash,Read,Write"
+# Common additions (uncomment what you use):
+# ALLOWED_TOOLS="${ALLOWED_TOOLS},mcp__slack__search_messages,mcp__slack__get_channel_history"
+# ALLOWED_TOOLS="${ALLOWED_TOOLS},mcp__github__search_pull_requests,mcp__github__list_pull_requests"
 # ---------------------------
 
 VACATION_FILE="${COSY_DIR}/work/vacation.md"
@@ -68,10 +78,9 @@ log "PTO is active (${START_DATE} to ${END_DATE}). Running vacation poller."
 OUTPUT_FILE="${OUTPUT_DIR}/${TODAY}.md"
 
 # Run Claude Code headlessly with the vacation poller prompt
-# Adjust --allowedTools based on your integrations (MCP servers, CLI tools, etc.)
 cd "${COSY_DIR}"
 claude -p "Run the vacation poller for $(date +'%A, %B %-d, %Y'). Follow the instructions in prompts/vacation-poller.md exactly. Save the output to briefs/vacation/${TODAY}.md." \
-    --allowedTools "Bash,Read,Write,mcp__slack__search_messages,mcp__slack__get_channel_history" \
+    --allowedTools "${ALLOWED_TOOLS}" \
     > "${OUTPUT_DIR}/${TODAY}-raw.log" 2>&1
 
 # Check if the brief was created

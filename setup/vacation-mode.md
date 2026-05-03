@@ -40,10 +40,10 @@ Edit `prompts/vacation-poller.md` to match your integrations:
 Edit `scripts/vacation-poller.sh`:
 
 1. Set `COSY_DIR` to the absolute path of your CoSy repo
-2. Adjust `--allowedTools` to match the tools your vacation poller needs:
-   - If you use MCP Slack: include `mcp__slack__search_messages`, `mcp__slack__get_channel_history`
-   - If you use other MCP tools: add them to the list
-   - `Bash`, `Read`, and `Write` are needed for Jira/email queries and saving output
+2. Set `ALLOWED_TOOLS` to match your integrations. The default (`Bash,Read,Write`)
+   covers REST API calls via curl and local file operations. Uncomment the lines
+   for your MCP integrations (Slack, GitHub, etc.). See `setup/integrations.md`
+   for how tool permissions work and how to find your MCP tool names.
 
 3. Make it executable:
    ```bash

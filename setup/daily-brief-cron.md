@@ -36,11 +36,16 @@ needs must be specified in the prompt file.
 Edit `scripts/daily-brief-cron.sh`:
 
 1. Set `COSY_DIR` to the absolute path of your CoSy repo
-2. Set `EMAIL` to your work email address
-3. Adjust `--allowedTools` to match the tools your daily brief needs:
-   - `Bash` -- for curl (Jira), gws (Gmail, Calendar, Tasks, Docs)
-   - `Read`, `Write` -- for reading context files and saving output
-   - MCP tools -- add any MCP server tools your brief uses (Slack, GitHub, etc.)
+
+2. Optionally set `EMAIL` to your work email address. If set, the brief will be
+   emailed as HTML in addition to being saved locally. Leave it empty to skip
+   email delivery -- the brief still saves to `briefs/daily/`.
+
+3. Set `ALLOWED_TOOLS` to match the tools your daily brief needs. The default
+   (`Bash,Read,Write`) covers REST API calls via curl and local file operations.
+   Uncomment the lines for your MCP integrations (Slack, GitHub, Google Drive,
+   etc.). See `setup/integrations.md` for how tool permissions work and how to
+   find your MCP tool names.
 
 4. **Keyring access** -- if your CLI tools use the system keyring (e.g., `gws` with
    OAuth), cron won't have access to the desktop session. Uncomment the `DBUS` and
@@ -128,7 +133,7 @@ and labeled with its source (Daily Brief, Vacation Poller, etc.).
 Check the session log at `logs/daily-brief-YYYY-MM-DD.log`. Common issues:
 - Auth failures (keyring not accessible -- uncomment the dbus exports)
 - MCP server not available in headless mode
-- Permission denied on a tool (add it to `--allowedTools`)
+- Permission denied on a tool (add it to `ALLOWED_TOOLS` in the script)
 
 **Email not arriving:**
 - Verify your email tool works from the command line first

@@ -29,8 +29,9 @@ scripts/               <- Utility scripts (includes vacation cron poller)
 5. Run `claude` in the repo directory
 6. Say: `CoSy, load my profile and give me a brief on what I should focus on today.`
 
-See `setup/getting-started.md` for the full walkthrough. For PTO automation,
-see `setup/vacation-mode.md`.
+See `setup/getting-started.md` for the full walkthrough. For automated daily
+briefs, see `setup/daily-brief-cron.md`. For PTO automation, see
+`setup/vacation-mode.md`.
 ## Your first 30 days
 
 CoSy gets more useful the more context she has. Don't try to fill everything at once —

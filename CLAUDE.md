@@ -59,7 +59,13 @@ After loading context files, run these checks before responding to the first mes
    > run a full Eisenhower reorder now, or skip this week?"
    See `prompts/task-prioritization.md` for full logic.
 
-2. **Vacation Return Check** -- Read `work/vacation.md`. If Status is `active` and
+2. **Pending Context Updates** -- Check if `memory/pending-updates.md` exists and has
+   content. If it does, show the user the pending entries and ask:
+   > "The daily brief cron logged [N] pending context updates. Want me to apply them?"
+   Walk through each entry. After applying (or skipping), remove the processed entries
+   from the file.
+
+3. **Vacation Return Check** -- Read `work/vacation.md`. If Status is `active` and
    today's date is after the End date, prompt the user:
    > "Welcome back! You were on PTO from [start] to [end]. I have [N] daily vacation
    > summaries ready. Want me to generate your return brief now?"

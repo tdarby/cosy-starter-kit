@@ -59,7 +59,8 @@ Key flags:
 | `-p "prompt"` | Run non-interactively with a prompt |
 | `--allowedTools "..."` | Pre-approve tools so it runs unattended |
 
-See `setup/vacation-mode.md` for a working example of headless execution via cron.
+See `setup/daily-brief-cron.md` and `setup/vacation-mode.md` for working examples
+of headless execution via cron.
 
 ---
 

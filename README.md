@@ -22,7 +22,7 @@ scripts/               <- Automation scripts (daily brief cron, vacation poller)
 
 ## Quick start
 
-1. Clone or copy this directory into a private repo
+1. Click **"Use this template"** on GitHub to create your own private repo (or clone directly)
 2. Fill in `profile/identity.md`, `profile/goals.md`, and `profile/preferences.md`
 3. Add your team to `team/roster.md`
 4. Set your current priorities in `work/priorities.md`

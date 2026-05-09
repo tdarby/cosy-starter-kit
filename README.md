@@ -141,6 +141,28 @@ fill in next.
 
 ---
 
+### Month 2+ -- Org Decision Toolkit
+*Goal: CoSy helps you think through high-stakes decisions, not just track them.*
+
+Once you have enough context in your files (team, stakeholders, priorities), four
+decision prompts become available. Each one handles a different type of problem:
+
+| Prompt | When to use | Trigger phrases |
+|--------|------------|-----------------|
+| **Pressure Test** | You're about to commit to a decision and want to stress-test it | "pressure test this", "poke holes in this" |
+| **People Situation Thinker** | A people dynamic has more going on than the surface | "think through this people situation", "what's really going on here" |
+| **Stakeholder Anticipator** | You're about to pitch or communicate something that matters | "anticipate how this lands", "how will [name] react to this" |
+| **Prioritization Frame** | Competing initiatives claim the same bandwidth | "help me prioritize these", "something has to come off the plate" |
+
+These are not daily prompts. They're for moments where the cost of a wrong read
+is high enough to warrant structured thinking. CoSy will suggest the appropriate
+one when a situation warrants it during normal work (briefs, 1:1 prep, debriefs).
+
+Each prompt produces a structured artifact saved to `work/decisions/`. See the
+individual prompt files in `prompts/` for the full framework and output format.
+
+---
+
 ### The compound effect
 
 CoSy's value isn't in any single prompt — it's in accumulated context.

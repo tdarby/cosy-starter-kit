@@ -126,6 +126,10 @@ Reusable prompts live in `prompts/`. Reference them by name:
 - `prompts/quarterly-review-manager.md` -- review a direct report's submission
 - `prompts/vacation-poller.md` -- daily PTO context poller (runs headlessly via cron)
 - `prompts/return-brief.md` -- synthesized return brief after PTO
+- `prompts/pressure-test.md` -- stress-test a decision before committing (Org Decision Toolkit)
+- `prompts/people-situation-thinker.md` -- map a complex people situation before acting (Org Decision Toolkit)
+- `prompts/stakeholder-anticipator.md` -- predict how a proposal lands with each stakeholder (Org Decision Toolkit)
+- `prompts/prioritization-frame.md` -- choose between competing initiatives (Org Decision Toolkit)
 
 ---
 

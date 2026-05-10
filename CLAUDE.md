@@ -48,29 +48,73 @@ If a file doesn't exist yet, note it and ask if the user wants to create it.
 
 ---
 
-## Session-Start Checks
+## Session-Start Audit
 
-After loading context files, run these checks before responding to the first message:
+Run this automatically at the start of every session, before responding to
+the user's first message. Do not wait to be asked. Surface findings as a
+brief session-start note. If everything looks healthy, say so in one line.
 
-1. **Weekly Reprioritization** -- Check the `_Last updated` date in `work/priorities.md`.
-   If it is Monday morning or Friday afternoon and the last update was more than 6 days ago,
-   prompt the user:
-   > "It's been [N days] since your last full reprioritization ([date]). Want me to
-   > run a full Eisenhower reorder now, or skip this week?"
-   See `prompts/task-prioritization.md` for full logic.
+### 1. Orient on time
+Run `date` to confirm today's date and day of week. Never assume.
 
-2. **Pending Context Updates** -- Check if `memory/pending-updates.md` exists and has
-   content. If it does, show the user the pending entries and ask:
-   > "The daily brief cron logged [N] pending context updates. Want me to apply them?"
-   Walk through each entry. After applying (or skipping), remove the processed entries
-   from the file.
+### 2. Weekly Reprioritization
+Check the `_Last updated` date in `work/priorities.md`.
+If it is Monday morning or Friday afternoon and the last update was more than
+6 days ago, prompt the user:
+> "It's been [N days] since your last full reprioritization ([date]). Want me to
+> run a full Eisenhower reorder now, or skip this week?"
+See `prompts/task-prioritization.md` for full logic.
 
-3. **Vacation Return Check** -- Read `work/vacation.md`. If Status is `active` and
-   today's date is after the End date, prompt the user:
-   > "Welcome back! You were on PTO from [start] to [end]. I have [N] daily vacation
-   > summaries ready. Want me to generate your return brief now?"
-   If they say yes, run `prompts/return-brief.md`. After generating the return brief,
-   set Status to `inactive` in `work/vacation.md`.
+### 3. Pending Context Updates
+Check if `memory/pending-updates.md` exists and has content. If it does, show
+the user the pending entries and ask:
+> "The daily brief cron logged [N] pending context updates. Want me to apply them?"
+Walk through each entry. After applying (or skipping), remove the processed entries
+from the file.
+
+### 4. Vacation Return Check
+Read `work/vacation.md`. If Status is `active` and today's date is after the End
+date, prompt the user:
+> "Welcome back! You were on PTO from [start] to [end]. I have [N] daily vacation
+> summaries ready. Want me to generate your return brief now?"
+If they say yes, run `prompts/return-brief.md`. After generating the return brief,
+set Status to `inactive` in `work/vacation.md`.
+
+### 5. Stale context check
+Scan `_Last updated` dates in these files and flag anything untouched for 14+ days:
+- `work/priorities.md`
+- `work/roadmap.md`
+- `memory/open-threads.md`
+
+This is a backstop. The weekly reprioritization check (step 2) catches
+`priorities.md` staleness on a tighter cadence; this catches everything else.
+
+### 6. Open thread scan
+Read `memory/open-threads.md`. Flag:
+- Any item in "My Commitments" that is past its target date
+- Any item in "Waiting On" with no update in 7+ days
+- Any thread that should probably be closed based on elapsed time
+
+### 7. 1:1 recency
+Scan `team/context/` files. Flag any direct report whose most recent 1:1
+note is more than 14 days old.
+
+### 8. Roadmap pulse
+Read `work/roadmap.md`. Flag any committed deliverable whose target date is
+within 14 days and has no recent status update.
+
+### 9. Relationship recency (Monday sessions only)
+On Mondays only, scan `relationships/context/` files. Flag anyone with no
+interaction logged in 21+ days. Skip this check on other days to keep
+startup fast; stakeholder drift is slower-moving than operational staleness.
+
+---
+
+### Session-start output format
+
+Keep it tight. Only surface items that need attention. Group findings under
+short headers (e.g., "Stale context," "Overdue threads"). If nothing needs
+attention, say so in one line and move on.
 
 ---
 

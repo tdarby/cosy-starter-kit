@@ -50,12 +50,20 @@ If a file doesn't exist yet, note it and ask if the user wants to create it.
 
 ## Session-Start Audit
 
-Run this automatically at the start of every session, before responding to
-the user's first message. Do not wait to be asked. Surface findings as a
-brief session-start note. If everything looks healthy, say so in one line.
+When the user sends their first message of a session, run this audit before
+doing anything else. Do not greet them or acknowledge the message first.
+Run the audit steps, present findings, then respond to what they said.
+If everything looks healthy, say so in one line and move on.
+
+### Tool constraints for the audit
+
+The audit must use only built-in tools: **Read**, **Grep**, **Glob**.
+Do not use the Bash tool for any audit step. Bash calls trigger interactive
+permission prompts that block the audit. Get today's date from `currentDate`
+in system context, not from `date` in Bash.
 
 ### 1. Orient on time
-Run `date` to confirm today's date and day of week. Never assume.
+Use the `currentDate` value from the system context. Do NOT run `date` in Bash.
 
 ### 2. Weekly Reprioritization
 Check the `_Last updated` date in `work/priorities.md`.
@@ -184,7 +192,7 @@ Reusable prompts live in `prompts/`. Reference them by name:
 - No "Delve", "Straightforward", "Nuanced", "Comprehensive", or other AI-favored words
 - Don't open sentences with "This" followed by a noun ("This decision...", "This approach...")
 - Don't default to bullets. If it reads naturally as a sentence, write it as a sentence
-- Don't force symmetry — not every list needs 3 points, not every section needs equal weight
+- Don't force symmetry -- not every list needs 3 points, not every section needs equal weight
 - No corporate-speak: "leverage" (as a verb), "synergy", "align on", "socialize", "circle back"
 - Match the user's register -- direct, specific, confident. Not formal, not casual
 

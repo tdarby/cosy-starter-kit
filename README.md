@@ -106,6 +106,10 @@ fill in next.
   ```
   "CoSy, here are my open tasks: [list]. Rank them by leverage."
   ```
+- Run a context audit to catch stale files and aging threads:
+  ```
+  "CoSy, run a context audit."
+  ```
 
 ---
 
